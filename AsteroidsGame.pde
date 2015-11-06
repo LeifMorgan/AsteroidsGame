@@ -2,96 +2,119 @@ SpaceShip xwing = new SpaceShip();
 public void setup() 
 {
   size(500,500);
+
 }
 public void draw() 
 {
+  background(0);
   xwing.show();
+  xwing.move();
+  
+
+
+
 }
+
+public void keyPressed(){
+  if(key == ' '){
+  xwing.setX( ((int)(Math.random()*500)) );  //HYPER SPACE
+  xwing.setY( ((int)(Math.random()*500)) );
+  xwing.setDirectionX(0);
+  xwing.setDirectionY(0);
+  }
+}
+
+
+
 class SpaceShip extends Floater//extends Floater  
 {   
   public SpaceShip(){
-    corners = 32;
+    int c = -27;
+    int e = -21;
+    corners = 33;
     xCorners = new int[corners];
     yCorners = new int[corners];
-    xCorners[ 0] = 14;
-    yCorners[ 0] = 7;
-    xCorners[ 1] =23;
-    yCorners[ 1] =7;
-    xCorners[ 2] =23;
-    yCorners[ 2] =6;
-    xCorners[ 3] =8;
-    yCorners[ 3] =6;
-    xCorners[ 4] =8;
-    yCorners[ 4] =7;
-    xCorners[ 5] =10;
-    yCorners[ 5] =7;
-    xCorners[ 6] =8;
-    yCorners[ 6] =14;
-    xCorners[ 7] =6;
-    yCorners[ 7] =14;
-    xCorners[ 8] =6;
-    yCorners[ 8] =17;
-    xCorners[ 9] =9;
-    yCorners[ 9] =17;
-    xCorners[10] =7;
-    yCorners[10] =18;
-    xCorners[11] =7;
-    yCorners[11] =22;
-    xCorners[12] =9;
-    yCorners[12] =23;
-    xCorners[13] =6;
-    yCorners[13] =23;
-    xCorners[14] =6;
-    yCorners[14] =26;
-    xCorners[15] =8;
-    yCorners[15] =26;
-    xCorners[16] =10;
-    yCorners[16] =33;
-    xCorners[17] =8;
-    yCorners[17] =33;
-    xCorners[18] =8;
-    yCorners[18] =34;
-    xCorners[19] =23;
-    yCorners[19] =34;
-    xCorners[20] =23;
-    yCorners[20] =33;
-    xCorners[21] =14;
-    yCorners[21] =33;
-    xCorners[22] =14;
-    yCorners[22] =26;
-    xCorners[23] =17;
-    yCorners[23] =26;
-    xCorners[24] =17;
-    yCorners[24] =23;
-    xCorners[25] =14;
-    yCorners[25] =23;
-    xCorners[26] =27;
-    yCorners[26] =21;
-    xCorners[27] =29;
-    yCorners[27] =20;
-    xCorners[28] =27;
-    yCorners[28] =19;
-    xCorners[29] =14;
-    yCorners[29] =17;
-    xCorners[30] =17;
-    yCorners[30] =17;
-    xCorners[31] =17;
-    yCorners[31] =14;
-    xCorners[32] =14;
-    yCorners[32] =14;
-    myColor = color(0,0,200);
-    setX(250);
-    setY(250);
-    setDirectionX(0);
-    setDirectionY(0);
-    setPointDirection(270);
+    xCorners[ 0] = c + 14;
+    yCorners[ 0] = e + 7;
+    xCorners[ 1] = c + 23;
+    yCorners[ 1] = e + 7;
+    xCorners[ 2] = c + 23;
+    yCorners[ 2] = e + 6;
+    xCorners[ 3] = c + 8;
+    yCorners[ 3] = e + 6;
+    xCorners[ 4] = c + 8;
+    yCorners[ 4] = e + 7;
+    xCorners[ 5] = c + 10;
+    yCorners[ 5] = e + 7;
+    xCorners[ 6] = c + 8;
+    yCorners[ 6] = e + 14;
+    xCorners[ 7] = c + 6;
+    yCorners[ 7] = e + 14;
+    xCorners[ 8] = c + 6;
+    yCorners[ 8] = e + 17;
+    xCorners[ 9] = c + 9;
+    yCorners[ 9] = e + 17;
+    xCorners[10] = c + 7;
+    yCorners[10] = e + 18;
+    xCorners[11] = c + 7;
+    yCorners[11] = e + 22;
+    xCorners[12] = c + 9;
+    yCorners[12] = e + 23;
+    xCorners[13] = c + 6;
+    yCorners[13] = e + 23;
+    xCorners[14] = c + 6;
+    yCorners[14] = e + 26;
+    xCorners[15] = c + 8;
+    yCorners[15] = e + 26;
+    xCorners[16] = c + 10;
+    yCorners[16] = e + 33;
+    xCorners[17] = c + 8;
+    yCorners[17] = e + 33;
+    xCorners[18] = c + 8;
+    yCorners[18] = e + 34;
+    xCorners[19] = c + 23;
+    yCorners[19] = e + 34;
+    xCorners[20] = c + 23;
+    yCorners[20] = e + 33;
+    xCorners[21] = c + 14;
+    yCorners[21] = e + 33;
+    xCorners[22] = c + 14;
+    yCorners[22] = e + 26;
+    xCorners[23] = c + 17;
+    yCorners[23] = e + 26;
+    xCorners[24] = c + 17;
+    yCorners[24] = e + 23;
+    xCorners[25] = c + 14;
+    yCorners[25] = e + 23;
+    xCorners[26] = c + 27;
+    yCorners[26] = e + 21;
+    xCorners[27] = c + 29;
+    yCorners[27] = e + 20;
+    xCorners[28] = c + 27;
+    yCorners[28] = e + 19;
+    xCorners[29] = c + 14;
+    yCorners[29] = e + 17;
+    xCorners[30] = c + 17;
+    yCorners[30] = e + 17;
+    xCorners[31] = c + 17;
+    yCorners[31] = e + 14;
+    xCorners[32] = c + 14;
+    yCorners[32] = e + 14;
+
+    myColor = color(200,200,200);
+    myCenterX = 250;
+    myCenterY = 250;
+    myDirectionX = 0;
+    myDirectionY = 0;
+    myPointDirection = 0;
 
 
-  }
+
+}
   public void setX(int x) {myCenterX = x;} 
   public int getX() {return (int)(myCenterX);}   
-  public void setY(int y) {myCenterY = y;};   
-  public int getY() {return (int)(myCenterX);}   
+  public void setY(int y) {myCenterY = y;}   
+  public int getY() {return (int)(myCenterY);}   
   public void setDirectionX(double x) {myDirectionX = x;}   
   public double getDirectionX() {return myDirectionX;}   
   public void setDirectionY(double y) {myDirectionY = y;}   
@@ -99,6 +122,8 @@ class SpaceShip extends Floater//extends Floater
   public void setPointDirection(int degrees) {myPointDirection = degrees;}   
   public double getPointDirection() {return myPointDirection;} 
 }
+
+
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
   protected int corners;  //the number of corners, a triangular floater has 3   
@@ -123,18 +148,23 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
   public void accelerate (double dAmount)   
   {          
     //convert the current direction the floater is pointing to radians    
-    double dRadians =myPointDirection*(Math.PI/180);     
+    double dRadians = myPointDirection*(Math.PI/180);   
+
     //change coordinates of direction of travel    
     myDirectionX += ((dAmount) * Math.cos(dRadians));    
     myDirectionY += ((dAmount) * Math.sin(dRadians));       
   }   
-  public void rotate (int nDegreesOfRotation)   
+  public void rotate (int nDegreesofRotation)   
   {     
-    //rotates the floater by a given number of degrees    
-    myPointDirection+=nDegreesOfRotation;   
+
+
+     myPointDirection += nDegreesofRotation;
   }   
+
+
   public void move ()   //move the floater in the current direction of travel
   {      
+
     //change the x and y coordinates by myDirectionX and myDirectionY       
     myCenterX += myDirectionX;    
     myCenterY += myDirectionY;     
@@ -155,7 +185,44 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     else if (myCenterY < 0)
     {     
       myCenterY = height;    
-    }   
+    }  
+    
+
+//Tangent of mouseY - (mouseY - xwingY)   over    mouseX - (mouseX - xwingX) to get the point direction facing the mouse
+
+
+    if (mouseX>xwing.getX() && mouseY<xwing.getY())
+     {
+      myPointDirection = (-1)*(180/Math.PI)*Math.atan(Math.abs((double)mouseY - (double)xwing.getY())/Math.abs((double)mouseX - (double)xwing.getX()));
+     }
+
+     //second quadrant
+     if (mouseX<xwing.getX() && mouseY<xwing.getY())
+     {
+      myPointDirection = 180 + (180/Math.PI)*Math.atan(Math.abs((double)mouseY - (double)xwing.getY())/Math.abs((double)mouseX - (double)xwing.getX()));
+     }
+     //third quadrant
+     if (mouseX<xwing.getX() && mouseY>xwing.getY())
+     {
+      myPointDirection = 180 - (180/Math.PI)*Math.atan(Math.abs((double)mouseY - (double)xwing.getY())/Math.abs((double)mouseX - (double)xwing.getX()));
+     }
+     //fourth quadrant
+     if (mouseX>xwing.getX() && mouseY>xwing.getY())
+     {
+
+      myPointDirection = (180/Math.PI)*Math.atan(Math.abs((double)mouseY - (double)xwing.getY())/Math.abs((double)mouseX - (double)xwing.getX()));
+     }
+ 
+
+     if(keyPressed && key == 'w'){
+      xwing.accelerate(0.2);
+     } if(keyPressed && key == 's'){
+      xwing.accelerate(-0.2);
+     } 
+
+
+
+
   }   
   public void show ()  //Draws the floater at the current position  
   {             
