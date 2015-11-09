@@ -251,7 +251,11 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
       xwing.accelerate(-0.2);
      } 
 
-
+    if(myDirectionY > 7){
+      xwing.setDirectionY(7);
+    } if(myDirectionX > 7){
+      xwing.setDirectionX(7);
+    }
 
 
   }   
