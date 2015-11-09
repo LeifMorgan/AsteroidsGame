@@ -1,24 +1,55 @@
 SpaceShip xwing = new SpaceShip();
+Stars [] sky;
 public void setup() 
 {
-  size(500,500);
+  size(700,700);
+  sky = new Stars[100];
+  for(int i = 0; i < sky.length; i++){
+    sky[i] = new Stars();
+  }
 
 }
 public void draw() 
 {
   background(0);
+   for(int i = 0; i < sky.length; i++){
+    sky[i].show();
+  }
   xwing.show();
   xwing.move();
   
+ 
 
 
 
 }
 
+class Stars
+{
+    private int starX;
+    private int starY;
+    private int starColor;
+
+    public Stars()
+    {
+      starX = (int)(Math.random()*700);
+      starY = (int)(Math.random()*700);
+      starColor = color((int)(Math.random()*200+55),(int)(Math.random()*200+55),(int)(Math.random()*200+55));
+    }
+    public void show () 
+    {
+      noStroke();
+      fill(starColor);
+      ellipse((float)starX,(float)starY, 10.0, 10.0);
+    }
+
+}
+
+
 public void keyPressed(){
   if(key == ' '){
-  xwing.setX( ((int)(Math.random()*500)) );  //HYPER SPACE
-  xwing.setY( ((int)(Math.random()*500)) );
+  xwing.setX( ((int)(Math.random()*700)) );  //HYPER SPACE
+  xwing.setY( ((int)(Math.random()*700)) );
   xwing.setDirectionX(0);
   xwing.setDirectionY(0);
   }
@@ -29,7 +60,7 @@ public void keyPressed(){
 class SpaceShip extends Floater//extends Floater  
 {   
   public SpaceShip(){
-    int c = -27;
+    int c = -13;
     int e = -21;
     corners = 33;
     xCorners = new int[corners];
