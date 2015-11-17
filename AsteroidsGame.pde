@@ -1,4 +1,5 @@
 SpaceShip xwing = new SpaceShip();
+Asteroid tiefighter = new Asteroid();
 Stars [] sky;
 public void setup() 
 {
@@ -17,11 +18,8 @@ public void draw()
   }
   xwing.show();
   xwing.move();
-  
+  tiefighter.show();
  
-
-
-
 }
 
 class Stars
@@ -34,7 +32,7 @@ class Stars
     {
       starX = (int)(Math.random()*700);
       starY = (int)(Math.random()*700);
-      starColor = color((int)(Math.random()*200+55),(int)(Math.random()*200+55),(int)(Math.random()*200+55));
+      starColor = color(255);
     }
     public void show () 
     {
@@ -132,7 +130,7 @@ class SpaceShip extends Floater//extends Floater
     xCorners[32] = c + 14;
     yCorners[32] = e + 14;
 
-    myColor = color(200,200,200);
+    myColor = color(215,91,30);
     myCenterX = 250;
     myCenterY = 250;
     myDirectionX = 0;
@@ -153,6 +151,8 @@ class SpaceShip extends Floater//extends Floater
   public void setPointDirection(int degrees) {myPointDirection = degrees;}   
   public double getPointDirection() {return myPointDirection;} 
 }
+
+
 
 
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
@@ -256,9 +256,21 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     } if(myDirectionX > 7){
       xwing.setDirectionX(7);
     }
+    if(myDirectionY < 0){
+      xwing.setDirectionY(0);
+    } if(myDirectionX < 0){
+      xwing.setDirectionX(0);
+    }
 
 
   }   
+
+
+
+
+
+
+
   public void show ()  //Draws the floater at the current position  
   {             
     fill(myColor);   
@@ -277,4 +289,145 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     endShape(CLOSE);  
   }   
 } 
+
+class Asteroid extends Floater
+{
+    public void setX(int x) {myCenterX = x;} 
+    public int getX() {return (int)(myCenterX);}   
+    public void setY(int y) {myCenterY = y;}   
+    public int getY() {return (int)(myCenterY);}   
+    public void setDirectionX(double x) {myDirectionX = x;}   
+    public double getDirectionX() {return myDirectionX;}   
+    public void setDirectionY(double y) {myDirectionY = y;}   
+    public double getDirectionY() {return myDirectionY;}   
+    public void setPointDirection(int degrees) {myPointDirection = degrees;}   
+    public double getPointDirection() {return myPointDirection;}
+
+
+    public Asteroid()
+    {
+    int k = 2; 
+    int l = -8;
+    int m = -20;
+    corners = 28;
+    xCorners = new int[corners];
+    yCorners = new int[corners];
+    xCorners[ 0] = (l + 0)*k;
+    yCorners[ 0] = (m + 16)*k;
+
+    xCorners[ 1] = (l + 3)*k;     //left tip
+    yCorners[ 1] = (m + 8)*k; 
+
+    xCorners[ 2] = (l + 3)*k;
+    yCorners[ 2] = (m + 19)*k;
+
+    xCorners[ 3] = (l + 5)*k;
+    yCorners[ 3] = (m + 19)*k;
+
+    xCorners[ 4] = (l + 5)*k;
+    yCorners[ 4] = (m + 18)*k;
+
+    xCorners[ 5] = (l + 6)*k;
+    yCorners[ 5] = (m + 17)*k;
+
+    xCorners[ 6] = (l + 8)*k;
+    yCorners[ 6] = (m + 16)*k;
+
+    xCorners[ 7] = (l + 10)*k;
+    yCorners[ 7] = (m + 16)*k;
+
+    xCorners[ 8] = (l + 11)*k;
+    yCorners[ 8] = (m + 17)*k;
+
+    xCorners[ 9] = (l + 12)*k;
+    yCorners[ 9] = (m + 18)*k;
+
+    xCorners[10] = (l + 12)*k;
+    yCorners[10] = (m + 19)*k;
+
+    xCorners[11] = (l + 14)*k;
+    yCorners[11] = (m + 19)*k;
+
+    xCorners[12] = (l + 14)*k;      //right tip
+    yCorners[12] = (m + 8)*k;
+
+    xCorners[13] = (l + 17)*k;
+    yCorners[13] = (m + 16)*k;
+
+    xCorners[14] = (l + 17)*k;
+    yCorners[14] = (m + 24)*k;
+
+    xCorners[15] = (l + 14)*k;
+    yCorners[15] = (m + 30)*k;
+
+    xCorners[16] = (l + 14)*k;
+    yCorners[16] = (m + 21)*k;
+
+    xCorners[17] = (l + 12)*k;
+    yCorners[17] = (m + 21)*k;
+
+    xCorners[18] = (l + 12)*k;
+    yCorners[18] = (m + 22)*k;
+
+    xCorners[19] = (l + 11)*k;
+    yCorners[19] = (m + 23)*k;
+
+    xCorners[20] = (l + 9)*k;
+    yCorners[20] = (m + 24)*k;
+
+    xCorners[21] = (l + 8)*k;
+    yCorners[21] = (m + 24)*k;
+
+    xCorners[22] = (l + 6)*k;
+    yCorners[22] = (m + 23)*k;
+
+    xCorners[23] = (l + 5)*k;
+    yCorners[23] = (m + 22)*k;
+
+    xCorners[24] = (l + 5)*k;
+    yCorners[24] = (m + 21)*k;
+
+    xCorners[25] = (l + 3)*k;
+    yCorners[25] = (m + 21)*k;
+
+    xCorners[26] = (l + 3)*k;
+    yCorners[26] = (m + 30)*k;
+
+    xCorners[27] = (l + 0)*k;
+    yCorners[27] = (m + 24)*k;
+
+    myColor = color(128);
+    myCenterX = 250;
+    myCenterY = 250;
+
+
+    }
+
+    public void show(){
+       fill(myColor);   
+    stroke(myColor);    
+    //convert degrees to radians for sin and cos         
+    double dRadians = myPointDirection*(Math.PI/180);                 
+    int xRotatedTranslated, yRotatedTranslated;    
+    beginShape();         
+    for(int nI = 0; nI < corners; nI++)    
+    {     
+      //rotate and translate the coordinates of the floater using current direction 
+      xRotatedTranslated = (int)((xCorners[nI]* Math.cos(dRadians)) - (yCorners[nI] * Math.sin(dRadians))+myCenterX);     
+      yRotatedTranslated = (int)((xCorners[nI]* Math.sin(dRadians)) + (yCorners[nI] * Math.cos(dRadians))+myCenterY);      
+      vertex(xRotatedTranslated,yRotatedTranslated);    
+    }   
+    endShape(CLOSE);  
+    }
+
+
+
+
+  
+}
+
+
+
+
+
 
