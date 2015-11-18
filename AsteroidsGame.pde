@@ -19,6 +19,7 @@ public void draw()
   xwing.show();
   xwing.move();
   tiefighter.show();
+  tiefighter.move();
  
 }
 
@@ -255,11 +256,10 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
       xwing.setDirectionY(7);
     } if(myDirectionX > 7){
       xwing.setDirectionX(7);
-    }
-    if(myDirectionY < 0){
-      xwing.setDirectionY(0);
-    } if(myDirectionX < 0){
-      xwing.setDirectionX(0);
+    } if(myDirectionY < -7){
+      xwing.setDirectionY(-7);
+    } if(myDirectionX < -7){
+      xwing.setDirectionX(-7);
     }
 
 
@@ -302,7 +302,7 @@ class Asteroid extends Floater
     public double getDirectionY() {return myDirectionY;}   
     public void setPointDirection(int degrees) {myPointDirection = degrees;}   
     public double getPointDirection() {return myPointDirection;}
-
+    public int rotSpeed;
 
     public Asteroid()
     {
@@ -399,7 +399,10 @@ class Asteroid extends Floater
     myColor = color(128);
     myCenterX = 250;
     myCenterY = 250;
-
+    myDirectionX = (int)(Math.random()*3+1);
+    myDirectionY = (int)(Math.random()*3+1);
+    myPointDirection = rotSpeed;
+    rotSpeed = (int)(Math.random()*2+1);
 
     }
 
@@ -418,6 +421,11 @@ class Asteroid extends Floater
       vertex(xRotatedTranslated,yRotatedTranslated);    
     }   
     endShape(CLOSE);  
+    }
+
+    public void move(){
+      rotate(rotSpeed);
+      super.move();
     }
 
 
