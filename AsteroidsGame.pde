@@ -98,7 +98,7 @@ class SpaceShip extends Floater //extends Floater
     public SpaceShip() {
         int c = -13;
         int e = -21;
-        corners = 33;
+        corners = 33; //spaceship
         xCorners = new int[corners];
         yCorners = new int[corners];
         xCorners[0] = c + 14;
@@ -168,6 +168,48 @@ class SpaceShip extends Floater //extends Floater
         xCorners[32] = c + 14;
         yCorners[32] = e + 14;
 
+        int t = 20;
+        int g = 3;
+
+        leftcorner = 5; //left boost
+        xLeftcorner = new int[leftcorner];
+        yLeftcorner = new int[leftcorner];
+        xLeftcorner[0] = (0) * t;
+        yLeftcorner[0] = (2) * g;
+
+        xLeftcorner[1] = (2) * t;
+        yLeftcorner[1] = (1) * g;
+
+        xLeftcorner[2] = (4) * t;
+        yLeftcorner[2] = (1) * g;
+
+        xLeftcorner[3] = (4) * t;
+        yLeftcorner[3] = (4) * g;
+
+        xLeftcorner[4] = (3) * t;
+        yLeftcorner[4] = (4) * g;
+
+
+        rightcorner = 5; //left boost
+        xRightcorner = new int[leftcorner];
+        yRightcorner = new int[leftcorner];
+        xRightcorner[0] = 0;
+        yRightcorner[0] = 3;
+
+        xLeftcorner[1] = 3;
+        yLeftcorner[1] = 1;
+
+        xLeftcorner[2] = 4;
+        yLeftcorner[2] = 1;
+
+        xLeftcorner[3] = 4;
+        yLeftcorner[3] = 4;
+
+        xLeftcorner[4] = 2;
+        yLeftcorner[4] = 4;
+
+
+
         myColor = color(215, 91, 30);
         myCenterX = 250;
         myCenterY = 250;
@@ -178,70 +220,86 @@ class SpaceShip extends Floater //extends Floater
 
     public void move() {
 
-      
-
-        myCenterX += myDirectionX;
-        myCenterY += myDirectionY;
 
 
-
-        if (myCenterX > width) {
-            myCenterX = 0;
-        } else if (myCenterX < 0) {
-            myCenterX = width;
-        }
-
-        if (myCenterY > height) {
-            myCenterY = 0;
-        } else if (myCenterY < 0) {
-            myCenterY = height;
-        }
-
-    } //ends move
-
-    public void control(){
-      fill(51, 255, 255);
-        if (keyPressed && key == 'w') {
-            xwing.accelerate(0.2);
-        }
-        if (keyPressed && key == 's') {
-            xwing.accelerate(-0.2);
-        }
+            myCenterX += myDirectionX;
+            myCenterY += myDirectionY;
 
 
 
-        if (mouseX > xwing.getX() && mouseY < xwing.getY()) {
-            myPointDirection = (-1) * (180 / Math.PI) * Math.atan(Math.abs((double) mouseY - (double) xwing.getY()) / Math.abs((double) mouseX - (double) xwing.getX()));
-        }
+            if (myCenterX > width) {
+                myCenterX = 0;
+            } else if (myCenterX < 0) {
+                myCenterX = width;
+            }
 
-        //second quadrant
-        if (mouseX < xwing.getX() && mouseY < xwing.getY()) {
-            myPointDirection = 180 + (180 / Math.PI) * Math.atan(Math.abs((double) mouseY - (double) xwing.getY()) / Math.abs((double) mouseX - (double) xwing.getX()));
-        }
-        //third quadrant
-        if (mouseX < xwing.getX() && mouseY > xwing.getY()) {
-            myPointDirection = 180 - (180 / Math.PI) * Math.atan(Math.abs((double) mouseY - (double) xwing.getY()) / Math.abs((double) mouseX - (double) xwing.getX()));
-        }
-        //fourth quadrant
-        if (mouseX > xwing.getX() && mouseY > xwing.getY()) {
-            myPointDirection = (180 / Math.PI) * Math.atan(Math.abs((double) mouseY - (double) xwing.getY()) / Math.abs((double) mouseX - (double) xwing.getX()));
-        }
+            if (myCenterY > height) {
+                myCenterY = 0;
+            } else if (myCenterY < 0) {
+                myCenterY = height;
+            }
+
+        } //ends move
+
+    public void control() {
+            fill(51, 255, 255);
+            if (keyPressed && key == 'w') {
+                xwing.accelerate(0.2);
+
+                double dRadians = myPointDirection * (Math.PI / 180);
+                int xRotatedTranslated, yRotatedTranslated;
+                fill(0, 0, (int)(Math.random() * 255));
+                noStroke();
+
+                beginShape();
+                for (int nI = 0; nI < leftcorner; nI++) {
+                    //rotate and translate the coordinates of the floater using current direction 
+                    xRotatedTranslated = (int)((xLeftcorner[nI] * Math.cos(dRadians)) - (yLeftcorner[nI] * Math.sin(dRadians)) + myCenterX);
+                    yRotatedTranslated = (int)((xLeftcorner[nI] * Math.sin(dRadians)) + (yLeftcorner[nI] * Math.cos(dRadians)) + myCenterY);
+                    vertex(xRotatedTranslated, yRotatedTranslated);
+                }
+                endShape(CLOSE);
+            }
 
 
-        if (myDirectionY > 6) {
-            xwing.setDirectionY(6);
-        }
-        if (myDirectionX > 6) {
-            xwing.setDirectionX(6);
-        }
-        if (myDirectionY < -6) {
-            xwing.setDirectionY(-6);
-        }
-        if (myDirectionX < -6) {
-            xwing.setDirectionX(-6);
-        }
+            if (keyPressed && key == 's') {
+                xwing.accelerate(-0.2);
+            }
 
-    } //ends control
+
+
+            if (mouseX > xwing.getX() && mouseY < xwing.getY()) {
+                myPointDirection = (-1) * (180 / Math.PI) * Math.atan(Math.abs((double) mouseY - (double) xwing.getY()) / Math.abs((double) mouseX - (double) xwing.getX()));
+            }
+
+            //second quadrant
+            if (mouseX < xwing.getX() && mouseY < xwing.getY()) {
+                myPointDirection = 180 + (180 / Math.PI) * Math.atan(Math.abs((double) mouseY - (double) xwing.getY()) / Math.abs((double) mouseX - (double) xwing.getX()));
+            }
+            //third quadrant
+            if (mouseX < xwing.getX() && mouseY > xwing.getY()) {
+                myPointDirection = 180 - (180 / Math.PI) * Math.atan(Math.abs((double) mouseY - (double) xwing.getY()) / Math.abs((double) mouseX - (double) xwing.getX()));
+            }
+            //fourth quadrant
+            if (mouseX > xwing.getX() && mouseY > xwing.getY()) {
+                myPointDirection = (180 / Math.PI) * Math.atan(Math.abs((double) mouseY - (double) xwing.getY()) / Math.abs((double) mouseX - (double) xwing.getX()));
+            }
+
+
+            if (myDirectionY > 6) {
+                xwing.setDirectionY(6);
+            }
+            if (myDirectionX > 6) {
+                xwing.setDirectionX(6);
+            }
+            if (myDirectionY < -6) {
+                xwing.setDirectionY(-6);
+            }
+            if (myDirectionX < -6) {
+                xwing.setDirectionX(-6);
+            }
+
+        } //ends control
 
 } //ends spaceship
 
@@ -253,6 +311,12 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     protected int corners; //the number of corners, a triangular floater has 3   
     protected int[] xCorners;
     protected int[] yCorners;
+    protected int leftcorner; //number of corners of left boost 
+    protected int[] xLeftcorner;
+    protected int[] yLeftcorner;
+    protected int rightcorner; //number of corners of right boost  
+    protected int[] xRightcorner;
+    protected int[] yRightcorner;
     protected int myColor;
     protected double myCenterX, myCenterY; //holds center coordinates   
     protected double myDirectionX, myDirectionY; //holds x and y coordinates of the vector for direction of travel   
@@ -466,11 +530,11 @@ class Asteroid extends Floater {
     }
 
     public void move() {
-          super.move();
+        super.move();
 
-            //change the x and y coordinates by myDirectionX and myDirectionY       
-          
+        //change the x and y coordinates by myDirectionX and myDirectionY       
 
-            
+
+
     }
 } //ends asteroid
