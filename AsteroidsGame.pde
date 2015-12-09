@@ -1,5 +1,6 @@
 SpaceShip xwing = new SpaceShip();
 ArrayList<Asteroid> tiefighter = new ArrayList<Asteroid>();
+ArrayList<Bullet> laser = new ArrayList<Bullet>();
 Stars[] sky;
 
 public void setup() {
@@ -9,6 +10,7 @@ public void setup() {
         sky[i] = new Stars();
     }
     for(int q = 0; q < 8; q++) { tiefighter.add(new Asteroid());  }
+
 }
 
 
@@ -24,6 +26,9 @@ public void draw() {
         tiefighter.get(i).show();
     }
 
+
+
+
   for(int b = 0; b < tiefighter.size(); b++){
     if(dist(xwing.getX(), xwing.getY(), tiefighter.get(b).getX(), tiefighter.get(b).getY()) < 50)
         tiefighter.remove(b);
@@ -36,12 +41,16 @@ public void draw() {
 }
 
 
-public void keyPressed() {
+public void keyPressed() { //hyperspace
     if (key == ' ') {
         xwing.setX(((int)(Math.random() * 700))); //HYPER SPACE
         xwing.setY(((int)(Math.random() * 700)));
         xwing.setDirectionX(0);
         xwing.setDirectionY(0);
+    }
+    if (mouseButton == LEFT){ //lasers
+        
+    
     }
 }
 
@@ -278,6 +287,60 @@ class SpaceShip extends Floater //extends Floater
 
 } //ends spaceship
 
+class Bullet extends Floater
+{
+  public double dRadians;
+    public void setX(int x) {
+        myCenterX = x;
+    }
+    public int getX() {
+        return (int)(myCenterX);
+    }
+    public void setY(int y) {
+        myCenterY = y;
+    }
+    public int getY() {
+        return (int)(myCenterY);
+    }
+    public void setDirectionX(double x) {
+        myDirectionX = x;
+    }
+    public double getDirectionX() {
+        return myDirectionX;
+    }
+    public void setDirectionY(double y) {
+        myDirectionY = y;
+    }
+    public double getDirectionY() {
+        return myDirectionY;
+    }
+    public void setPointDirection(int degrees) {
+        myPointDirection = degrees;
+    }
+    public double getPointDirection() {
+        return myPointDirection;
+    }
+
+  public Bullet(SpaceShip xwing){
+
+     myCenterX = xwing.getX();
+     myCenterY = xwing.getY();
+     myPointDirection = xwing.getPointDirection();
+     double dRadians = myPointDirection*(Math.PI/180);
+     myDirectionX = 5*Math.cos(dRadians) + xwing.getDirectionX();
+     myDirectionY = 5*Math.sin(dRadians) + xwing.getDirectionY();
+  }
+
+  public void show(){
+    fill(255,0,0);
+    ellipse((float)myCenterX, (float)myCenterY,5,10);
+  }
+  public void move(){
+      myCenterX += myDirectionX;
+      myCenterY += myDirectionY;
+  }
+ 
+}
 
 
 
