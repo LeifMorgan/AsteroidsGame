@@ -1,6 +1,7 @@
 SpaceShip xwing = new SpaceShip();
 ArrayList<Asteroid> tiefighter = new ArrayList<Asteroid>();
-ArrayList<Bullet> laser = new ArrayList<Bullet>();
+ArrayList<Bullet> laser1;
+ArrayList<Bullet1> laser2;
 Stars[] sky;
 
 public void setup() {
@@ -11,7 +12,18 @@ public void setup() {
     }
     for(int q = 0; q < 8; q++) { tiefighter.add(new Asteroid());  }
 
-}
+
+    laser1 = new ArrayList<Bullet>();
+    for( int j = 0; j < 2; j++){
+      laser1.add(new Bullet(xwing));
+    }
+
+    laser2 = new ArrayList<Bullet1> ();
+    for (int k = 0; k < 2; k++){
+      laser2.add(new Bullet1(xwing));
+    }
+  } 
+
 
 
 
@@ -28,6 +40,17 @@ public void draw() {
 
 
 
+    for ( int s = 0; s < laser1.size(); s++ ){
+      laser1.get(s).move();
+      laser1.get(s).show();
+    }
+
+    for ( int p = 0; p < laser2.size(); p++ ){
+      laser2.get(p).move();
+      laser2.get(p).show();
+    }
+
+
 
   for(int b = 0; b < tiefighter.size(); b++){
     if(dist(xwing.getX(), xwing.getY(), tiefighter.get(b).getX(), tiefighter.get(b).getY()) < 50)
@@ -38,7 +61,8 @@ public void draw() {
     xwing.show();
     xwing.move();
     xwing.control();
-}
+  } 
+
 
 
 public void keyPressed() { //hyperspace
@@ -48,10 +72,15 @@ public void keyPressed() { //hyperspace
         xwing.setDirectionX(0);
         xwing.setDirectionY(0);
     }
-    if (mouseButton == LEFT){ //lasers
-        
-    
-    }
+
+}
+
+public void mousePressed() {
+      if (mouseButton == LEFT){ //lasers
+        laser1.add(new Bullet(xwing));
+      } if(mouseButton == RIGHT){
+        laser2.add(new Bullet1(xwing));
+      }
 }
 
 class Stars {
@@ -289,7 +318,20 @@ class SpaceShip extends Floater //extends Floater
 
 class Bullet extends Floater
 {
-  public double dRadians;
+    public double dRadians;
+
+
+  public Bullet(SpaceShip theShip){
+
+     myCenterX = theShip.getX() - 17;
+     myCenterY = theShip.getY() + 10;
+     myPointDirection = theShip.getPointDirection();
+     dRadians = myPointDirection*(Math.PI/180);
+     myDirectionX = 5*Math.cos(dRadians) + theShip.getDirectionX();
+     myDirectionY = 5*Math.sin(dRadians) + theShip.getDirectionY();
+  }
+
+
     public void setX(int x) {
         myCenterX = x;
     }
@@ -320,20 +362,10 @@ class Bullet extends Floater
     public double getPointDirection() {
         return myPointDirection;
     }
-
-  public Bullet(SpaceShip xwing){
-
-     myCenterX = xwing.getX();
-     myCenterY = xwing.getY();
-     myPointDirection = xwing.getPointDirection();
-     double dRadians = myPointDirection*(Math.PI/180);
-     myDirectionX = 5*Math.cos(dRadians) + xwing.getDirectionX();
-     myDirectionY = 5*Math.sin(dRadians) + xwing.getDirectionY();
-  }
-
   public void show(){
     fill(255,0,0);
-    ellipse((float)myCenterX, (float)myCenterY,5,10);
+    noStroke();
+    ellipse((float)myCenterX, (float)myCenterY,5,5);
   }
   public void move(){
       myCenterX += myDirectionX;
@@ -343,6 +375,66 @@ class Bullet extends Floater
 }
 
 
+
+
+
+class Bullet1 extends Floater
+{
+    public double dRadians;
+
+
+  public Bullet1(SpaceShip theShip){
+
+     myCenterX = theShip.getX() + 17;
+     myCenterY = theShip.getY()-10;
+     myPointDirection = theShip.getPointDirection();
+     dRadians = myPointDirection*(Math.PI/180);
+     myDirectionX = 5*Math.cos(dRadians) + theShip.getDirectionX();
+     myDirectionY = 5*Math.sin(dRadians) + theShip.getDirectionY();
+  }
+
+
+    public void setX(int x) {
+        myCenterX = x;
+    }
+    public int getX() {
+        return (int)(myCenterX);
+    }
+    public void setY(int y) {
+        myCenterY = y;
+    }
+    public int getY() {
+        return (int)(myCenterY);
+    }
+    public void setDirectionX(double x) {
+        myDirectionX = x;
+    }
+    public double getDirectionX() {
+        return myDirectionX;
+    }
+    public void setDirectionY(double y) {
+        myDirectionY = y;
+    }
+    public double getDirectionY() {
+        return myDirectionY;
+    }
+    public void setPointDirection(int degrees) {
+        myPointDirection = degrees;
+    }
+    public double getPointDirection() {
+        return myPointDirection;
+    }
+  public void show(){
+    fill(255,0,0);
+    noStroke();
+    ellipse((float)myCenterX, (float)myCenterY,5,5);
+  }
+  public void move(){
+      myCenterX += myDirectionX;
+      myCenterY += myDirectionY;
+  }
+ 
+}
 
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {
