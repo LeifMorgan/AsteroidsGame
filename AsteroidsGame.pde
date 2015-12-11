@@ -289,10 +289,7 @@ class SpaceShip extends Floater //extends Floater
             fill(51, 255, 255);
             if (keyPressed && key == 'w') {
                 xwing.accelerate(0.2);
-                ellipse((float) myCenterX - 3, (float) myCenterY - 30, 5.0, 5.0);
-                ellipse((float) myCenterX + 3, (float) myCenterY - 30, 5.0, 5.0);
-                ellipse((float) myCenterX - 5, (float) myCenterY - 40, 5.0, 5.0);
-                ellipse((float) myCenterX + 5, (float) myCenterY - 40, 5.0, 5.0);
+
 
             }
 
