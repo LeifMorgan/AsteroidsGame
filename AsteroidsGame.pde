@@ -10,7 +10,7 @@ public void setup() {
     for (int i = 0; i < sky.length; i++) {
         sky[i] = new Stars();
     }
-    for (int q = 0; q < 8; q++) {
+    for (int q = 0; q < 15; q++) {
         tiefighter.add(new Asteroid());
     }
 
