@@ -1,7 +1,7 @@
 SpaceShip xwing = new SpaceShip();
-ArrayList<Asteroid> tiefighter = new ArrayList<Asteroid>();
-ArrayList<Bullet> laser1;
-ArrayList<Bullet1> laser2;
+ArrayList < Asteroid > tiefighter = new ArrayList < Asteroid > ();
+ArrayList < Bullet > laser1;
+ArrayList < Bullet1 > laser2;
 Stars[] sky;
 
 public void setup() {
@@ -10,19 +10,21 @@ public void setup() {
     for (int i = 0; i < sky.length; i++) {
         sky[i] = new Stars();
     }
-    for(int q = 0; q < 8; q++) { tiefighter.add(new Asteroid());  }
-
-
-    laser1 = new ArrayList<Bullet>();
-    for( int j = 0; j < 2; j++){
-      laser1.add(new Bullet(xwing));
+    for (int q = 0; q < 8; q++) {
+        tiefighter.add(new Asteroid());
     }
 
-    laser2 = new ArrayList<Bullet1> ();
-    for (int k = 0; k < 2; k++){
-      laser2.add(new Bullet1(xwing));
+
+    laser1 = new ArrayList < Bullet > ();
+    for (int j = 0; j < 2; j++) {
+        laser1.add(new Bullet(xwing));
     }
-  } 
+
+    laser2 = new ArrayList < Bullet1 > ();
+    for (int k = 0; k < 2; k++) {
+        laser2.add(new Bullet1(xwing));
+    }
+}
 
 
 
@@ -40,28 +42,46 @@ public void draw() {
 
 
 
-    for ( int s = 0; s < laser1.size(); s++ ){
-      laser1.get(s).move();
-      laser1.get(s).show();
+    for (int s = 0; s < laser1.size(); s++) {
+        laser1.get(s).move();
+        laser1.get(s).show();
+        for (int r = 0; r < tiefighter.size(); r++) {
+            if (dist(laser1.get(s).getX(), laser1.get(s).getY(), tiefighter.get(r).getX(), tiefighter.get(r).getY()) < 30){
+                tiefighter.remove(r);
+                laser1.remove(s);
+                break;
+              }
+        }
     }
 
-    for ( int p = 0; p < laser2.size(); p++ ){
-      laser2.get(p).move();
-      laser2.get(p).show();
+
+
+    for (int p = 0; p < laser2.size(); p++) {
+        laser2.get(p).move();
+        laser2.get(p).show();
+        for (int u = 0; u < tiefighter.size(); u++) {
+            if (dist(laser2.get(p).getX(), laser2.get(p).getY(), tiefighter.get(u).getX(), tiefighter.get(u).getY()) < 30){
+                tiefighter.remove(u);
+                laser2.remove(p);
+                break;
+              }
+        }
     }
 
 
 
-  for(int b = 0; b < tiefighter.size(); b++){
-    if(dist(xwing.getX(), xwing.getY(), tiefighter.get(b).getX(), tiefighter.get(b).getY()) < 50)
-        tiefighter.remove(b);
-  } if(tiefighter.size() < 7){
+    for (int b = 0; b < tiefighter.size(); b++) {
+        if (dist(xwing.getX(), xwing.getY(), tiefighter.get(b).getX(), tiefighter.get(b).getY()) < 50)
+            tiefighter.remove(b);
+
+    }
+    if (tiefighter.size() < 7) {
         tiefighter.add(new Asteroid());
-  }
+    }
     xwing.show();
     xwing.move();
     xwing.control();
-  } 
+}
 
 
 
@@ -76,11 +96,12 @@ public void keyPressed() { //hyperspace
 }
 
 public void mousePressed() {
-      if (mouseButton == LEFT){ //lasers
+    if (mouseButton == LEFT) { //lasers
         laser1.add(new Bullet(xwing));
-      } if(mouseButton == RIGHT){
+    }
+    if (mouseButton == RIGHT) {
         laser2.add(new Bullet1(xwing));
-      }
+    }
 }
 
 class Stars {
@@ -207,49 +228,49 @@ class SpaceShip extends Floater //extends Floater
         yCorners[31] = e + 14;
         xCorners[32] = c + 14;
         yCorners[32] = e + 14;
-        
+
         int t = 20;
         int g = 3;
-        
+
         leftcorner = 5; //left boost
         xLeftcorner = new int[leftcorner];
         yLeftcorner = new int[leftcorner];
-        xLeftcorner[0] = (0)*t;
-        yLeftcorner[0] = (2)*g;
-        
-        xLeftcorner[1] = (2)*t;
-        yLeftcorner[1] = (1)*g;
-        
-        xLeftcorner[2] = (4)*t;
-        yLeftcorner[2] = (1)*g;
-        
-        xLeftcorner[3] = (4)*t;
-        yLeftcorner[3] = (4)*g;
-        
-        xLeftcorner[4] = (3)*t;
-        yLeftcorner[4] = (4)*g;
-        
-        
+        xLeftcorner[0] = (0) * t;
+        yLeftcorner[0] = (2) * g;
+
+        xLeftcorner[1] = (2) * t;
+        yLeftcorner[1] = (1) * g;
+
+        xLeftcorner[2] = (4) * t;
+        yLeftcorner[2] = (1) * g;
+
+        xLeftcorner[3] = (4) * t;
+        yLeftcorner[3] = (4) * g;
+
+        xLeftcorner[4] = (3) * t;
+        yLeftcorner[4] = (4) * g;
+
+
         rightcorner = 5; //left boost
         xRightcorner = new int[leftcorner];
         yRightcorner = new int[leftcorner];
         xRightcorner[0] = 0;
         yRightcorner[0] = 3;
-        
+
         xLeftcorner[1] = 3;
         yLeftcorner[1] = 1;
-        
+
         xLeftcorner[2] = 4;
         yLeftcorner[2] = 1;
-        
+
         xLeftcorner[3] = 4;
         yLeftcorner[3] = 4;
-        
+
         xLeftcorner[4] = 2;
         yLeftcorner[4] = 4;
-        
-        
-        
+
+
+
         myColor = color(215, 91, 30);
         myCenterX = 250;
         myCenterY = 250;
@@ -259,77 +280,79 @@ class SpaceShip extends Floater //extends Floater
     }
 
     public void move() {
-      
-      super.move();
 
-    } //ends move
+            super.move();
 
-    public void control(){
-      fill(51, 255, 255);
-        if (keyPressed && key == 'w') {
-            xwing.accelerate(0.2);
-             ellipse((float)myCenterX-3, (float)myCenterY-30, 5.0,5.0);    
-              ellipse((float)myCenterX+3, (float)myCenterY-30, 5.0,5.0); 
-               ellipse((float)myCenterX-5, (float)myCenterY-40, 5.0,5.0); 
-                ellipse((float)myCenterX+5, (float)myCenterY-40, 5.0,5.0); 
+        } //ends move
 
-        }
-            
-        
-        if (keyPressed && key == 's') {
-            xwing.accelerate(-0.2);
-        }
+    public void control() {
+            fill(51, 255, 255);
+            if (keyPressed && key == 'w') {
+                xwing.accelerate(0.2);
+                ellipse((float) myCenterX - 3, (float) myCenterY - 30, 5.0, 5.0);
+                ellipse((float) myCenterX + 3, (float) myCenterY - 30, 5.0, 5.0);
+                ellipse((float) myCenterX - 5, (float) myCenterY - 40, 5.0, 5.0);
+                ellipse((float) myCenterX + 5, (float) myCenterY - 40, 5.0, 5.0);
+
+            }
 
 
-
-        if (mouseX > xwing.getX() && mouseY < xwing.getY()) {
-            myPointDirection = (-1) * (180 / Math.PI) * Math.atan(Math.abs((double) mouseY - (double) xwing.getY()) / Math.abs((double) mouseX - (double) xwing.getX()));
-        }
-        //second quadrant
-        if (mouseX < xwing.getX() && mouseY < xwing.getY()) {
-            myPointDirection = 180 + (180 / Math.PI) * Math.atan(Math.abs((double) mouseY - (double) xwing.getY()) / Math.abs((double) mouseX - (double) xwing.getX()));
-        }
-        //third quadrant
-        if (mouseX < xwing.getX() && mouseY > xwing.getY()) {
-            myPointDirection = 180 - (180 / Math.PI) * Math.atan(Math.abs((double) mouseY - (double) xwing.getY()) / Math.abs((double) mouseX - (double) xwing.getX()));
-        }
-        //fourth quadrant
-        if (mouseX > xwing.getX() && mouseY > xwing.getY()) {
-            myPointDirection = (180 / Math.PI) * Math.atan(Math.abs((double) mouseY - (double) xwing.getY()) / Math.abs((double) mouseX - (double) xwing.getX()));
-        }
+            if (keyPressed && key == 's') {
+                xwing.accelerate(-0.2);
+            }
 
 
-        if (myDirectionY > 6) {
-            xwing.setDirectionY(6);
-        }
-        if (myDirectionX > 6) {
-            xwing.setDirectionX(6);
-        }
-        if (myDirectionY < -6) {
-            xwing.setDirectionY(-6);
-        }
-        if (myDirectionX < -6) {
-            xwing.setDirectionX(-6);
-        }
 
-    } //ends control
+            if (mouseX > xwing.getX() && mouseY < xwing.getY()) {
+                myPointDirection = (-1) * (180 / Math.PI) * Math.atan(Math.abs((double) mouseY - (double) xwing.getY()) / Math.abs((double) mouseX - (double) xwing.getX()));
+            }
+            //second quadrant
+            if (mouseX < xwing.getX() && mouseY < xwing.getY()) {
+                myPointDirection = 180 + (180 / Math.PI) * Math.atan(Math.abs((double) mouseY - (double) xwing.getY()) / Math.abs((double) mouseX - (double) xwing.getX()));
+            }
+            //third quadrant
+            if (mouseX < xwing.getX() && mouseY > xwing.getY()) {
+                myPointDirection = 180 - (180 / Math.PI) * Math.atan(Math.abs((double) mouseY - (double) xwing.getY()) / Math.abs((double) mouseX - (double) xwing.getX()));
+            }
+            //fourth quadrant
+            if (mouseX > xwing.getX() && mouseY > xwing.getY()) {
+                myPointDirection = (180 / Math.PI) * Math.atan(Math.abs((double) mouseY - (double) xwing.getY()) / Math.abs((double) mouseX - (double) xwing.getX()));
+            }
+
+
+            if (myDirectionY > 6) {
+                xwing.setDirectionY(6);
+            }
+            if (myDirectionX > 6) {
+                xwing.setDirectionX(6);
+            }
+            if (myDirectionY < -6) {
+                xwing.setDirectionY(-6);
+            }
+            if (myDirectionX < -6) {
+                xwing.setDirectionX(-6);
+            }
+
+        } //ends control
 
 } //ends spaceship
 
-class Bullet extends Floater
-{
+
+
+//LEFT CLICK
+class Bullet extends Floater { 
     public double dRadians;
 
 
-  public Bullet(SpaceShip theShip){
+    public Bullet(SpaceShip theShip) {
 
-     myCenterX = theShip.getX() - 17;
-     myCenterY = theShip.getY() + 10;
-     myPointDirection = theShip.getPointDirection();
-     dRadians = myPointDirection*(Math.PI/180);
-     myDirectionX = 5*Math.cos(dRadians) + theShip.getDirectionX();
-     myDirectionY = 5*Math.sin(dRadians) + theShip.getDirectionY();
-  }
+        myCenterX = theShip.getX() - 17;
+        myCenterY = theShip.getY() + 10;
+        myPointDirection = theShip.getPointDirection();
+        dRadians = myPointDirection * (Math.PI / 180);
+        myDirectionX = 7 * Math.cos(dRadians) + theShip.getDirectionX();
+        myDirectionY = 7 * Math.sin(dRadians) + theShip.getDirectionY();
+    }
 
 
     public void setX(int x) {
@@ -362,36 +385,34 @@ class Bullet extends Floater
     public double getPointDirection() {
         return myPointDirection;
     }
-  public void show(){
-    fill(255,0,0);
-    noStroke();
-    ellipse((float)myCenterX, (float)myCenterY,5,5);
-  }
-  public void move(){
-      myCenterX += myDirectionX;
-      myCenterY += myDirectionY;
-  }
- 
+    public void show() {
+        fill(255, 0, 0);
+        noStroke();
+        ellipse((float) myCenterX, (float) myCenterY, 5, 5);
+    }
+    public void move() {
+        myCenterX += myDirectionX;
+        myCenterY += myDirectionY;
+    }
+
 }
 
 
 
-
-
-class Bullet1 extends Floater
-{
+//RIGHT CLICK
+class Bullet1 extends Floater {
     public double dRadians;
 
 
-  public Bullet1(SpaceShip theShip){
+    public Bullet1(SpaceShip theShip) {
 
-     myCenterX = theShip.getX() + 17;
-     myCenterY = theShip.getY()-10;
-     myPointDirection = theShip.getPointDirection();
-     dRadians = myPointDirection*(Math.PI/180);
-     myDirectionX = 5*Math.cos(dRadians) + theShip.getDirectionX();
-     myDirectionY = 5*Math.sin(dRadians) + theShip.getDirectionY();
-  }
+        myCenterX = theShip.getX() + 17;
+        myCenterY = theShip.getY() - 10;
+        myPointDirection = theShip.getPointDirection();
+        dRadians = myPointDirection * (Math.PI / 180);
+        myDirectionX = 7 * Math.cos(dRadians) + theShip.getDirectionX();
+        myDirectionY = 7 * Math.sin(dRadians) + theShip.getDirectionY();
+    }
 
 
     public void setX(int x) {
@@ -424,16 +445,16 @@ class Bullet1 extends Floater
     public double getPointDirection() {
         return myPointDirection;
     }
-  public void show(){
-    fill(255,0,0);
-    noStroke();
-    ellipse((float)myCenterX, (float)myCenterY,5,5);
-  }
-  public void move(){
-      myCenterX += myDirectionX;
-      myCenterY += myDirectionY;
-  }
- 
+    public void show() {
+        fill(255, 0, 0);
+        noStroke();
+        ellipse((float) myCenterX, (float) myCenterY, 5, 5);
+    }
+    public void move() {
+        myCenterX += myDirectionX;
+        myCenterY += myDirectionY;
+    }
+
 }
 
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
@@ -557,12 +578,12 @@ class Asteroid extends Floater {
 
     public Asteroid() {
 
-        if(Math.random()>0.5){
-          rotSpeed = (int)(Math.random()*1+1);
+        if (Math.random() > 0.5) {
+            rotSpeed = (int)(Math.random() * 1 + 1);
         } else {
-          rotSpeed = -(int)(Math.random()*1+1);
+            rotSpeed = -(int)(Math.random() * 1 + 1);
         }
-      
+
         int k = 2;
         int l = -8;
         int m = -20;
@@ -652,26 +673,26 @@ class Asteroid extends Floater {
 
         xCorners[27] = (l + 1) * k;
         yCorners[27] = (m + 24) * k;
-        
- 
+
+
         myColor = color(128);
-        myCenterX = (int)(Math.random()*699);
-        myCenterY = (int)(Math.random()*699);
-        myDirectionX = Math.random()*4-2;
-        myDirectionY = Math.random()*4-2;
+        myCenterX = (int)(Math.random() * 699);
+        myCenterY = (int)(Math.random() * 699);
+        myDirectionX = Math.random() * 4 - 2;
+        myDirectionY = Math.random() * 4 - 2;
 
     }
     public void show() {
-      super.show();
+        super.show();
     }
 
     public void move() {
-          rotate(rotSpeed);
-          super.move();
+        rotate(rotSpeed);
+        super.move();
 
-            //change the x and y coordinates by myDirectionX and myDirectionY       
-          
+        //change the x and y coordinates by myDirectionX and myDirectionY       
 
-            
+
+
     }
 } //ends asteroid
