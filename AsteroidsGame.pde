@@ -75,7 +75,7 @@ public void draw() {
             tiefighter.remove(b);
 
     }
-    if (tiefighter.size() < 7) {
+    if (tiefighter.size() < 14) {
         tiefighter.add(new Asteroid());
     }
     xwing.show();
